@@ -1,0 +1,30 @@
+---
+title: Real-time event pipeline with Kafka & MongoDB Change Streams
+summary: Event-driven backbone for the world's most-used live chat platform, streaming data changes to downstream services with minimal latency.
+role: Back-end Engineer
+year: '2019–2021'
+tech: [Node.js, Apache Kafka, MongoDB]
+type: private
+featured: true
+order: 3
+---
+
+## Context
+
+tawk.to is the most-used live chat application in the world, embedded on millions of websites. Its backend is made of distributed services that need to react to each other's data.
+
+## Problem
+
+Core workflows were tightly coupled, and downstream services needed to learn about data changes quickly and reliably without polling the primary database.
+
+## What I did
+
+- Designed and built an event-driven service on Apache Kafka to decouple core workflows and give services a reliable way to communicate.
+- Built a real-time data pipeline that captures changes with MongoDB Change Streams and publishes them to Kafka for downstream consumers.
+- Maintained 100% test coverage on the services I owned.
+- Contributed to architecture discussions within a 4–5 person engineering team.
+
+## Impact
+
+- Data changes reach downstream services with minimal latency.
+- Core workflows are decoupled, so services can evolve independently.
