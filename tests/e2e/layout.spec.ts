@@ -41,8 +41,9 @@ test.describe('with a dark OS preference', () => {
 test('theme toggle name includes its visible text', async ({ page }) => {
   await page.goto('/');
   const toggle = page.getByRole('button', { name: 'Toggle colour theme' });
+  // Before hydration the label is a 'theme: …' placeholder; wait it out.
+  await expect(toggle).toHaveText(/^theme: (dark|light)$/);
   const text = (await toggle.textContent())?.trim() ?? '';
-  expect(text).toMatch(/^theme: (dark|light)$/);
   await expect(toggle).toHaveAccessibleName(`${text}, toggle colour theme`);
 });
 
