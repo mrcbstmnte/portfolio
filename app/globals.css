@@ -100,6 +100,12 @@ body {
     color-scheme: light;
   }
 
+  /* next-themes sets an inline color-scheme on <html>; without !important
+     Chrome paints the page margins dark when printing from dark mode. */
+  html {
+    color-scheme: light !important;
+  }
+
   @page {
     margin: 14mm;
   }
