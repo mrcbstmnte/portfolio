@@ -177,7 +177,7 @@ describe('real case studies', () => {
     expect(counts).toEqual({
       'resist-store': 5,
       'white-label-ecommerce-platform': 2,
-      'direct-online-banking-payments': 0,
+      'direct-online-banking-payments': 2,
       'knowledgebase-and-crm': 4,
     });
   });

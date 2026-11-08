@@ -34,7 +34,7 @@ export default async function ProjectOpengraphImage({
         color: '#e7e5e4',
       }}
     >
-      <div style={{ fontSize: 28, color: '#4ade80' }}>
+      <div style={{ fontSize: 28, color: '#fbbf24' }}>
         {`~/marc/projects $ cat ${slug}.mdx`}
       </div>
       <div style={{ display: 'flex', flexDirection: 'column' }}>

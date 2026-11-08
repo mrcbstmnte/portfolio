@@ -75,9 +75,14 @@ test('tawk.to case study shows the public product pages', async ({ page }) => {
   );
 });
 
-test('case study without screenshots has no gallery', async ({ page }) => {
+test('PayMongo case study shows the payment methods and QR Ph', async ({
+  page,
+}) => {
   await page.goto('/projects/direct-online-banking-payments');
-  await expect(page.locator('figure')).toHaveCount(0);
+  await expect(page.locator('figure')).toHaveCount(2);
+  await expect(page.locator('figcaption').first()).toContainText(
+    'with the team',
+  );
 });
 
 test('the event pipeline is part of the Knowledgebase and CRM case study', async ({

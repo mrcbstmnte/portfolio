@@ -27,7 +27,7 @@ A personal site that serves two purposes:
 | CV | Generated from site data at `/cv`; "Download PDF" via browser print |
 | Content storage | Typed TS data files + MDX for case studies |
 | Visual style | Developer/terminal-flavoured, tasteful — not a gimmick terminal |
-| Accent colour | Terminal green |
+| Accent colour | Amber (changed from terminal green on 2026-11-08) |
 | Contact | `mailto:` + copy-email button + LinkedIn + GitHub. No form. |
 | Structure | Single-scroll home + `/projects/[slug]` + `/cv` |
 | Hosting | Vercel (free tier) |
@@ -145,7 +145,7 @@ Terminal-themed: `command not found: <path>` with link home.
 ## 6. Visual design
 
 - Dark-first design. First visit follows the OS colour-scheme preference; the toggle switches dark/light and the choice is persisted
-- Near-black background, off-white text, single **terminal-green** accent; light mode uses a darker green that passes WCAG AA contrast
+- Near-black background, off-white text, single **amber** accent (`#fbbf24`); light mode uses a darker amber (`#b45309`) that passes WCAG AA contrast
 - Monospace for headings, labels, tags, prompts; sans for body copy
 - Motion: blinking hero cursor, subtle fade/slide-in on scroll; all disabled under `prefers-reduced-motion`
 - Responsive from 360px up; no horizontal scroll
@@ -153,7 +153,7 @@ Terminal-themed: `command not found: <path>` with link home.
 ## 7. SEO & sharing
 
 - Per-page `metadata` (title, description, canonical)
-- Open Graph image generated with `next/og` (name, title, green accent) for home and each case study
+- Open Graph image generated with `next/og` (name, title, amber accent) for home and each case study
 - `sitemap.ts` and `robots.ts`
 - Vercel Analytics (enabled, no cookies)
 

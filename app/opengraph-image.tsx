@@ -19,7 +19,7 @@ export default function OpengraphImage() {
         color: '#e7e5e4',
       }}
     >
-      <div style={{ fontSize: 32, color: '#4ade80' }}>~/marc $ whoami</div>
+      <div style={{ fontSize: 32, color: '#fbbf24' }}>~/marc $ whoami</div>
       <div style={{ fontSize: 76, fontWeight: 700, marginTop: 24 }}>
         {profile.name}
       </div>

@@ -91,3 +91,42 @@ test.describe('on a 360px phone', () => {
     expect(overflow).toBeLessThanOrEqual(0);
   });
 });
+
+test.describe('accent colour', () => {
+  for (const [scheme, rgb] of [
+    ['dark', 'rgb(251, 191, 36)'],
+    ['light', 'rgb(180, 83, 9)'],
+  ] as const) {
+    test(`is amber in ${scheme} mode`, async ({ browser }) => {
+      const page = await browser.newPage({ colorScheme: scheme });
+      await page.goto('/');
+      const title = page.getByText(
+        'Senior Software Engineer · Backend & Full Stack',
+        {
+          exact: true,
+        },
+      );
+      await expect(title).toHaveCSS('color', rgb);
+      await page.close();
+    });
+  }
+});
+
+test('serves the ~/m favicon in every format', async ({ page, request }) => {
+  await page.goto('/');
+  const icon = await page
+    .locator('link[rel="icon"][type="image/png"]')
+    .getAttribute('href');
+  const apple = await page
+    .locator('link[rel="apple-touch-icon"]')
+    .getAttribute('href');
+  for (const [path, type] of [
+    ['/favicon.ico', 'image/x-icon'],
+    [icon ?? '', 'image/png'],
+    [apple ?? '', 'image/png'],
+  ]) {
+    const response = await request.get(path);
+    expect(response.status(), path).toBe(200);
+    expect(response.headers()['content-type'], path).toContain(type);
+  }
+});
