@@ -15,7 +15,11 @@ export function loadProjects(
   dir = PROJECTS_DIR,
   publicDir = PUBLIC_DIR,
 ): Project[] {
-  const files = fs.readdirSync(dir).filter((file) => file.endsWith('.mdx'));
+  // Content is only read at build time (every page is static), so tell
+  // Turbopack not to trace these paths into the server bundle.
+  const files = fs
+    .readdirSync(/*turbopackIgnore: true*/ dir)
+    .filter((file) => file.endsWith('.mdx'));
 
   const projects = files.map((file) => {
     const source = path.join(path.relative(process.cwd(), dir), file);
@@ -28,7 +32,9 @@ export function loadProjects(
 
     let parsed;
     try {
-      parsed = matter(fs.readFileSync(path.join(dir, file), 'utf8'));
+      parsed = matter(
+        fs.readFileSync(path.join(/*turbopackIgnore: true*/ dir, file), 'utf8'),
+      );
     } catch (error) {
       throw new Error(
         `Invalid content in ${source}:\nfrontmatter is not valid YAML (${(error as Error).message.split('\n')[0]})`,
@@ -37,7 +43,9 @@ export function loadProjects(
     const { data, content } = parsed;
     const frontmatter = parseOrThrow(projectFrontmatterSchema, data, source);
     for (const shot of frontmatter.screenshots) {
-      if (!fs.existsSync(path.join(publicDir, shot.src))) {
+      if (
+        !fs.existsSync(path.join(/*turbopackIgnore: true*/ publicDir, shot.src))
+      ) {
         throw new Error(
           `Invalid content in ${source}:\nscreenshot not found: public${shot.src}`,
         );
