@@ -5,6 +5,7 @@ import type { Company } from '@/lib/schemas';
 export const experience = [
   {
     name: 'Montani International Inc.',
+    url: 'https://valore.com',
     location: 'Remote',
     tech: ['Ruby on Rails', 'PostgreSQL'],
     roles: [
@@ -25,6 +26,7 @@ export const experience = [
   },
   {
     name: 'PayMongo Philippines Inc.',
+    url: 'https://paymongo.com',
     location: 'Remote',
     tech: ['Ruby on Rails', 'React.js'],
     roles: [
@@ -56,6 +58,7 @@ export const experience = [
   },
   {
     name: 'Rakuten Travel Xchange',
+    url: 'https://solutions.travel.rakuten.com',
     location: 'Remote',
     tech: ['Node.js'],
     roles: [
@@ -74,6 +77,7 @@ export const experience = [
   },
   {
     name: 'tawk.to',
+    url: 'https://www.tawk.to',
     location: 'Remote',
     tech: ['Node.js', 'Apache Kafka', 'MongoDB', 'Elasticsearch'],
     roles: [

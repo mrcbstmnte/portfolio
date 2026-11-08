@@ -1,6 +1,6 @@
 import { Tag } from '@/components/tag';
 import { splitHighlights } from '@/lib/experience';
-import { formatRange } from '@/lib/format';
+import { displayUrl, formatRange } from '@/lib/format';
 import type { Company } from '@/lib/schemas';
 
 function Highlights({ items }: { items: string[] }) {
@@ -32,7 +32,23 @@ export function ExperienceTimeline({ companies }: { companies: Company[] }) {
               className="bg-accent absolute top-2 -left-[29px] h-2.5 w-2.5 rounded-full"
             />
             <h3 className="font-mono text-lg font-semibold">{company.name}</h3>
-            <p className="text-muted font-mono text-xs">{company.location}</p>
+            <p className="text-muted font-mono text-xs">
+              {company.location}
+              {company.url && (
+                <>
+                  {' · '}
+                  <a
+                    href={company.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-accent break-all underline-offset-4 hover:underline"
+                  >
+                    {displayUrl(company.url)}
+                    <span aria-hidden="true"> ↗</span>
+                  </a>
+                </>
+              )}
+            </p>
 
             <div className="mt-3 space-y-1">
               {company.roles.map((role) => (

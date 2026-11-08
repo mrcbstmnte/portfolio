@@ -40,6 +40,15 @@ test('CV shows contact links but never the phone number', async ({ page }) => {
   expect(text).not.toMatch(/\+?\d[\d\s().-]{8,}\d/);
 });
 
+test('CV links company websites', async ({ page }) => {
+  await page.goto('/cv');
+  await expect(
+    page.getByRole('link', { name: 'solutions.travel.rakuten.com' }),
+  ).toHaveAttribute('href', 'https://solutions.travel.rakuten.com');
+  // PayMongo has two roles; the website shows on both.
+  await expect(page.getByRole('link', { name: 'paymongo.com' })).toHaveCount(2);
+});
+
 test('CV contact links are large enough to tap', async ({ page }) => {
   await page.goto('/cv');
   const links = page.locator('main header a');

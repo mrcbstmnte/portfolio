@@ -50,6 +50,18 @@ describe('site content', () => {
     );
   });
 
+  it('links each company that has a public website', () => {
+    const urls = Object.fromEntries(experience.map((c) => [c.name, c.url]));
+    expect(urls).toEqual({
+      'Montani International Inc.': 'https://valore.com',
+      'PayMongo Philippines Inc.': 'https://paymongo.com',
+      'Rakuten Travel Xchange': 'https://solutions.travel.rakuten.com',
+      'tawk.to': 'https://www.tawk.to',
+      SplitDragon: undefined,
+      'Akubo Software Philippines Inc.': undefined,
+    });
+  });
+
   it('has the seven CV skill groups and education', () => {
     expect(skills).toHaveLength(7);
     expect(education[0].degree).toBe('BS Computer Engineering');

@@ -85,6 +85,17 @@ export default function CvPage() {
                   </h3>
                   <p className="text-muted break-after-avoid text-sm italic">
                     {company.name} | {company.location}
+                    {company.url && (
+                      <>
+                        {' | '}
+                        <a
+                          href={company.url}
+                          className="underline-offset-2 hover:underline"
+                        >
+                          {displayUrl(company.url)}
+                        </a>
+                      </>
+                    )}
                   </p>
                   <ul className="mt-1 list-disc space-y-1 pl-5">
                     {role.highlights.map((highlight) => (

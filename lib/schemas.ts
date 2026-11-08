@@ -34,6 +34,7 @@ export const roleSchema = z
 export const companySchema = z.object({
   name: nonEmpty,
   location: nonEmpty,
+  url: httpUrl.optional(),
   roles: z.array(roleSchema).min(1),
   tech: z.array(nonEmpty),
 });

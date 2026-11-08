@@ -156,3 +156,18 @@ test.describe('scroll reveal on a phone', () => {
     expect(Number(opacity)).toBe(1);
   });
 });
+
+test('experience links company websites in a new tab', async ({ page }) => {
+  await page.goto('/');
+  const section = page.locator('#experience');
+  for (const [name, href] of [
+    ['valore.com', 'https://valore.com'],
+    ['paymongo.com', 'https://paymongo.com'],
+    ['solutions.travel.rakuten.com', 'https://solutions.travel.rakuten.com'],
+    ['tawk.to', 'https://www.tawk.to'],
+  ]) {
+    const link = section.getByRole('link', { name });
+    await expect(link).toHaveAttribute('href', href);
+    await expect(link).toHaveAttribute('target', '_blank');
+  }
+});

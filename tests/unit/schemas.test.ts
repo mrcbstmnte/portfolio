@@ -135,6 +135,17 @@ describe('companySchema', () => {
     expect(companySchema.safeParse(company).success).toBe(false);
   });
 
+  it('accepts an optional http(s) company website', () => {
+    expect(
+      companySchema.safeParse({ ...validCompany, url: 'https://acme.com' })
+        .success,
+    ).toBe(true);
+    expect(
+      companySchema.safeParse({ ...validCompany, url: 'javascript:alert(1)' })
+        .success,
+    ).toBe(false);
+  });
+
   it('rejects a company with no roles', () => {
     expect(
       companySchema.safeParse({ ...validCompany, roles: [] }).success,
