@@ -3,7 +3,7 @@ import { MissingPath } from '@/components/missing-path';
 
 export default function NotFound() {
   return (
-    <main className="mx-auto flex min-h-[60vh] max-w-4xl flex-col justify-center px-4 font-mono sm:px-6">
+    <main className="mx-auto flex min-h-[60vh] max-w-4xl flex-col justify-center px-4 font-mono break-all sm:px-6">
       <p className="text-muted text-sm">
         <span className="text-accent">~/marc</span> $ <MissingPath />
       </p>

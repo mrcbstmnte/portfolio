@@ -110,8 +110,9 @@ test('contact links point to LinkedIn and GitHub', async ({ page }) => {
 
 test('never shows the phone number', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('body')).not.toContainText('[redacted]');
-  await expect(page.locator('body')).not.toContainText('[redacted]');
+  // Any run of 10+ digits with phone separators, in any format.
+  const text = await page.locator('body').innerText();
+  expect(text).not.toMatch(/\+?\d[\d\s().-]{8,}\d/);
 });
 
 test('every internal link resolves', async ({ page, request }) => {

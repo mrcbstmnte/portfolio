@@ -75,3 +75,18 @@ test('unknown routes show the terminal 404 without console errors', async ({
   // The 404 response itself is logged by the browser; ignore only that.
   expect(errors.filter((e) => !e.includes('404'))).toEqual([]);
 });
+
+test.describe('on a 360px phone', () => {
+  test.use({ viewport: { width: 360, height: 740 } });
+
+  test('404 with a long unbroken path does not scroll horizontally', async ({
+    page,
+  }) => {
+    await page.goto(`/${'a'.repeat(60)}/${'b'.repeat(40)}`);
+    await expect(page.getByText('command not found:')).toBeVisible();
+    const overflow = await page.evaluate(
+      () => document.documentElement.scrollWidth - window.innerWidth,
+    );
+    expect(overflow).toBeLessThanOrEqual(0);
+  });
+});

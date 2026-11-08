@@ -35,8 +35,9 @@ test('CV shows contact links but never the phone number', async ({ page }) => {
   await expect(
     page.getByRole('link', { name: 'linkedin.com/in/mrcbstmnte' }),
   ).toBeVisible();
-  await expect(page.locator('body')).not.toContainText('[redacted]');
-  await expect(page.locator('body')).not.toContainText('[redacted]');
+  // Any run of 10+ digits with phone separators, in any format.
+  const text = await page.locator('body').innerText();
+  expect(text).not.toMatch(/\+?\d[\d\s().-]{8,}\d/);
 });
 
 test('CV contact links are large enough to tap', async ({ page }) => {

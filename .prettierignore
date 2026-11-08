@@ -5,3 +5,4 @@ playwright-report
 test-results
 package-lock.json
 AGENTS.md
+next-env.d.ts

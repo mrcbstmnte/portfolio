@@ -61,3 +61,31 @@ test.describe('on a 360px phone', () => {
     }
   });
 });
+
+test.describe('printing from dark mode', () => {
+  test.use({ colorScheme: 'dark' });
+
+  test('case study text prints dark on white', async ({ page }) => {
+    await page.goto('/projects/realtime-event-pipeline');
+    await expect(page.locator('html')).toHaveClass(/dark/);
+    await page.emulateMedia({ media: 'print' });
+
+    // Resolve each computed colour (may be oklch/lab) to RGB via a canvas.
+    const brightest = await page.evaluate(() => {
+      const ctx = document.createElement('canvas').getContext('2d')!;
+      const elements = document.querySelectorAll(
+        'article h1, article h2, article p, article li',
+      );
+      let max = 0;
+      for (const el of elements) {
+        ctx.clearRect(0, 0, 1, 1);
+        ctx.fillStyle = getComputedStyle(el).color;
+        ctx.fillRect(0, 0, 1, 1);
+        const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+        max = Math.max(max, r, g, b);
+      }
+      return max;
+    });
+    expect(brightest).toBeLessThan(120);
+  });
+});
