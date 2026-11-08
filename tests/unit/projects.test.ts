@@ -106,6 +106,22 @@ describe('real case studies', () => {
     expect(getFeaturedProjects()).toHaveLength(4);
   });
 
+  it('links the Valore case study to the live site', () => {
+    const valore = getProject('white-label-ecommerce-platform');
+    expect(valore?.title).toMatch(/Valore/);
+    expect(valore?.demoUrl).toBe('https://valore.com');
+    expect(valore?.repoUrl).toBeUndefined();
+    expect(valore?.tech).toEqual(['Ruby on Rails', 'PostgreSQL']);
+  });
+
+  it('lists the PayMongo stack on its case study', () => {
+    expect(getProject('direct-online-banking-payments')?.tech).toEqual([
+      'Ruby on Rails',
+      'React.js',
+      'QR Ph',
+    ]);
+  });
+
   it('finds a project by slug and returns null for unknown slugs', () => {
     expect(getProject('realtime-event-pipeline')?.type).toBe('private');
     expect(getProject('does-not-exist')).toBeNull();

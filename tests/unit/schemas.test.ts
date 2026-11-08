@@ -46,11 +46,14 @@ describe('projectFrontmatterSchema', () => {
     expect(result.success).toBe(true);
   });
 
-  it('rejects a private project that has a repo or demo link', () => {
+  it('rejects a private project that links to its source code', () => {
     expect(
       projectFrontmatterSchema.safeParse({ ...validProject, type: 'private' })
         .success,
     ).toBe(false);
+  });
+
+  it('accepts a private project that links to its live product', () => {
     expect(
       projectFrontmatterSchema.safeParse({
         ...validProject,
@@ -58,7 +61,7 @@ describe('projectFrontmatterSchema', () => {
         repoUrl: undefined,
         demoUrl: 'https://example.com',
       }).success,
-    ).toBe(false);
+    ).toBe(true);
   });
 
   it('rejects non-http links', () => {

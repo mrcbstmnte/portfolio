@@ -27,6 +27,14 @@ test('private case study shows NDA and no external links', async ({ page }) => {
   await expect(page.locator('aside')).toContainText('Back-end Engineer');
 });
 
+test('NDA case study can link to its live product', async ({ page }) => {
+  await page.goto('/projects/white-label-ecommerce-platform');
+  await expect(page.getByText('[NDA]')).toBeVisible();
+  await expect(
+    page.locator('aside').getByRole('link', { name: 'live site ↗' }),
+  ).toHaveAttribute('href', 'https://valore.com');
+});
+
 test('back link returns to the work section', async ({ page }) => {
   await page.goto('/projects/realtime-event-pipeline');
   await expect(page.getByRole('link', { name: '← cd ..' })).toHaveAttribute(

@@ -98,7 +98,7 @@ featured: boolean        # shown on home
 order: number            # sort order on home
 ```
 
-Private projects render an `[NDA]` badge and no links. Case-study body follows: **Context → Problem → What I did → Impact**.
+Private projects render an `[NDA]` badge and never link to source code (`repoUrl` is rejected); a `demoUrl` to a live public product is allowed and shown as "live site". Case-study body follows: **Context → Problem → What I did → Impact**.
 
 **Loaders (`lib/`)**
 

@@ -70,10 +70,10 @@ export const projectFrontmatterSchema = z
     order: z.number().int(),
   })
   .refine(
-    (project) =>
-      project.type === 'public' || (!project.repoUrl && !project.demoUrl),
+    // A live product is public anyway; only source code stays behind the NDA.
+    (project) => project.type === 'public' || !project.repoUrl,
     {
-      message: 'private (NDA) projects must not have repoUrl or demoUrl',
+      message: 'private (NDA) projects must not have a repoUrl',
       path: ['type'],
     },
   );

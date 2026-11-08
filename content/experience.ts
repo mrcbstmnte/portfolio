@@ -6,14 +6,14 @@ export const experience = [
   {
     name: 'Montani International Inc.',
     location: 'Remote',
-    tech: ['Ruby', 'Ruby on Rails', 'GitHub Actions'],
+    tech: ['Ruby on Rails', 'PostgreSQL'],
     roles: [
       {
         title: 'Full-Stack Ruby on Rails Developer',
         start: '2023-07',
         end: '2026-10',
         highlights: [
-          'Built and maintained a multi-storefront, white-label e-commerce platform supporting an unlimited number of branded storefronts from a single shared codebase, cutting the time to launch a new storefront to days rather than weeks.',
+          'Built and maintained Valore (valore.com), a multi-storefront, white-label e-commerce platform supporting an unlimited number of branded storefronts from a single shared codebase, cutting the time to launch a new storefront to days rather than weeks.',
           'Worked as one of 3 engineers who built the platform from the ground up, taking it from concept to production and supporting live e-commerce operations for new and used books.',
           "Led migration of the platform's payment gateway from a legacy third-party implementation to an internally integrated solution, improving maintainability and reducing production incidents.",
           'Developed core customer-facing flows — customizable storefront pages, transactional email templates, sign-up, checkout, and order confirmation — directly improving conversion and reducing support tickets tied to a confusing legacy flow.',
@@ -26,7 +26,7 @@ export const experience = [
   {
     name: 'PayMongo Philippines Inc.',
     location: 'Remote',
-    tech: [],
+    tech: ['Ruby on Rails', 'React.js'],
     roles: [
       {
         title: 'Senior Software Engineer (Interim Technical Lead)',

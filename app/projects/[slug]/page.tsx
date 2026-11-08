@@ -32,7 +32,7 @@ export default async function ProjectPage({ params }: Props) {
 
   const links = [
     { label: 'repo', href: project.repoUrl },
-    { label: 'demo', href: project.demoUrl },
+    { label: 'live site', href: project.demoUrl },
   ].filter((link): link is { label: string; href: string } => !!link.href);
 
   return (

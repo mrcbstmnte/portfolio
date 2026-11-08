@@ -35,6 +35,21 @@ describe('site content', () => {
     ]);
   });
 
+  it('lists the stack and product for Montani and PayMongo', () => {
+    const tech = Object.fromEntries(experience.map((c) => [c.name, c.tech]));
+    expect(tech['Montani International Inc.']).toEqual([
+      'Ruby on Rails',
+      'PostgreSQL',
+    ]);
+    expect(tech['PayMongo Philippines Inc.']).toEqual([
+      'Ruby on Rails',
+      'React.js',
+    ]);
+    expect(experience[0].roles[0].highlights[0]).toMatch(
+      /Valore \(valore\.com\)/,
+    );
+  });
+
   it('has the seven CV skill groups and education', () => {
     expect(skills).toHaveLength(7);
     expect(education[0].degree).toBe('BS Computer Engineering');

@@ -35,7 +35,7 @@ summary: One line for the card.
 role: Author
 year: '2026' # quote it
 tech: [TypeScript, Next.js]
-type: public # or private (NDA) — private must not have links
+type: public # or private (NDA) — private may link a live site, never a repo
 repoUrl: https://github.com/mrcbstmnte/my-project
 demoUrl: https://example.com
 featured: true
