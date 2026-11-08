@@ -35,6 +35,7 @@ test('sitemap lists home, CV and every case study', async ({ request }) => {
   const body = await (await request.get('/sitemap.xml')).text();
   for (const path of [
     '/cv',
+    '/projects/resist-store',
     '/projects/white-label-ecommerce-platform',
     '/projects/direct-online-banking-payments',
     '/projects/realtime-event-pipeline',

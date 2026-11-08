@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og';
 import { profile } from '@/lib/content';
+import { projectBadge } from '@/lib/format';
 import { getAllProjects, getProject } from '@/lib/projects';
 
 export const alt = 'Case study';
@@ -18,7 +19,7 @@ export default async function ProjectOpengraphImage({
   const { slug } = await params;
   const project = getProject(slug);
   const title = project?.title ?? 'Case study';
-  const badge = project?.type === 'public' ? '[public]' : '[NDA]';
+  const badge = project ? projectBadge(project.type) : '';
 
   return new ImageResponse(
     <div

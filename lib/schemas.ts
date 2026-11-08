@@ -63,17 +63,17 @@ export const projectFrontmatterSchema = z
     role: nonEmpty,
     year: nonEmpty,
     tech: z.array(nonEmpty).min(1),
-    type: z.enum(['public', 'private']),
+    type: z.enum(['public', 'private', 'client']),
     repoUrl: httpUrl.optional(),
     demoUrl: httpUrl.optional(),
     featured: z.boolean(),
     order: z.number().int(),
   })
   .refine(
-    // A live product is public anyway; only source code stays behind the NDA.
+    // A live product is public anyway; only source code stays private.
     (project) => project.type === 'public' || !project.repoUrl,
     {
-      message: 'private (NDA) projects must not have a repoUrl',
+      message: 'only public projects may have a repoUrl',
       path: ['type'],
     },
   );

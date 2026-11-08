@@ -1,18 +1,19 @@
 import Link from 'next/link';
 import { Tag } from '@/components/tag';
+import { projectBadge } from '@/lib/format';
 import type { Project } from '@/lib/schemas';
 
 export function ProjectCard({ project }: { project: Project }) {
-  const isPrivate = project.type === 'private';
-
   return (
     <Link
       href={`/projects/${project.slug}`}
       className="group border-border bg-surface hover:border-accent flex flex-col rounded-lg border p-5 transition-colors"
     >
       <div className="flex items-center justify-between gap-2 font-mono text-xs">
-        <span className={isPrivate ? 'text-muted' : 'text-accent'}>
-          [{isPrivate ? 'NDA' : 'public'}]
+        <span
+          className={project.type === 'private' ? 'text-muted' : 'text-accent'}
+        >
+          {projectBadge(project.type)}
         </span>
         <span className="text-muted">{project.year}</span>
       </div>

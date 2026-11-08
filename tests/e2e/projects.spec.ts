@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 const slugs = [
+  'resist-store',
   'white-label-ecommerce-platform',
   'direct-online-banking-payments',
   'realtime-event-pipeline',
@@ -33,6 +34,17 @@ test('NDA case study can link to its live product', async ({ page }) => {
   await expect(
     page.locator('aside').getByRole('link', { name: 'live site ↗' }),
   ).toHaveAttribute('href', 'https://valore.com');
+});
+
+test('client case study shows its badge and live store link', async ({
+  page,
+}) => {
+  await page.goto('/projects/resist-store');
+  await expect(page.getByText('[client]')).toBeVisible();
+  await expect(
+    page.locator('aside').getByRole('link', { name: 'live site ↗' }),
+  ).toHaveAttribute('href', 'https://resist-store.vercel.app');
+  await expect(page.locator('aside a[href*="github.com"]')).toHaveCount(0);
 });
 
 test('back link returns to the work section', async ({ page }) => {

@@ -1,3 +1,5 @@
+import type { ProjectFrontmatter } from '@/lib/schemas';
+
 const MONTHS = [
   'Jan',
   'Feb',
@@ -34,4 +36,14 @@ export function toConfigKey(label: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '_')
     .replace(/^_|_$/g, '');
+}
+
+const BADGES: Record<ProjectFrontmatter['type'], string> = {
+  public: '[public]',
+  private: '[NDA]',
+  client: '[client]',
+};
+
+export function projectBadge(type: ProjectFrontmatter['type']): string {
+  return BADGES[type];
 }

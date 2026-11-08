@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   displayUrl,
+  projectBadge,
   formatRange,
   formatYearMonth,
   toConfigKey,
@@ -42,5 +43,13 @@ describe('toConfigKey', () => {
     expect(toConfigKey('AI-Assisted Development')).toBe(
       'ai_assisted_development',
     );
+  });
+});
+
+describe('projectBadge', () => {
+  it('labels each project type', () => {
+    expect(projectBadge('private')).toBe('[NDA]');
+    expect(projectBadge('public')).toBe('[public]');
+    expect(projectBadge('client')).toBe('[client]');
   });
 });

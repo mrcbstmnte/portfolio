@@ -96,14 +96,15 @@ describe('loadProjects', () => {
 });
 
 describe('real case studies', () => {
-  it('loads the four drafted case studies, all featured', () => {
+  it('loads the five case studies, all featured', () => {
     expect(getAllProjects().map((p) => p.slug)).toEqual([
+      'resist-store',
       'white-label-ecommerce-platform',
       'direct-online-banking-payments',
       'realtime-event-pipeline',
       'knowledgebase-and-crm',
     ]);
-    expect(getFeaturedProjects()).toHaveLength(4);
+    expect(getFeaturedProjects()).toHaveLength(5);
   });
 
   it('links the Valore case study to the live site', () => {
@@ -112,6 +113,13 @@ describe('real case studies', () => {
     expect(valore?.demoUrl).toBe('https://valore.com');
     expect(valore?.repoUrl).toBeUndefined();
     expect(valore?.tech).toEqual(['Ruby on Rails', 'PostgreSQL']);
+  });
+
+  it('marks RESIST as a client build linking to the live store', () => {
+    const resist = getProject('resist-store');
+    expect(resist?.type).toBe('client');
+    expect(resist?.demoUrl).toBe('https://resist-store.vercel.app');
+    expect(resist?.repoUrl).toBeUndefined();
   });
 
   it('lists the PayMongo stack on its case study', () => {

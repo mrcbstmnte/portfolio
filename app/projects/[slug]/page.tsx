@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { Tag } from '@/components/tag';
+import { projectBadge } from '@/lib/format';
 import { getAllProjects, getProject } from '@/lib/projects';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -47,7 +48,7 @@ export default async function ProjectPage({ params }: Props) {
       <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_200px]">
         <article className="prose prose-neutral dark:not-print:prose-invert prose-headings:font-mono prose-a:text-accent max-w-[70ch] min-w-0">
           <p className="not-prose text-muted font-mono text-xs">
-            [{project.type === 'private' ? 'NDA' : 'public'}]
+            {projectBadge(project.type)}
           </p>
           <h1>{project.title}</h1>
           <p className="lead">{project.summary}</p>

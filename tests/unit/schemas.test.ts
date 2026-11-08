@@ -64,6 +64,24 @@ describe('projectFrontmatterSchema', () => {
     ).toBe(true);
   });
 
+  it('accepts a client project with a live-site link', () => {
+    expect(
+      projectFrontmatterSchema.safeParse({
+        ...validProject,
+        type: 'client',
+        repoUrl: undefined,
+        demoUrl: 'https://example.com',
+      }).success,
+    ).toBe(true);
+  });
+
+  it('rejects a client project that links to its source code', () => {
+    expect(
+      projectFrontmatterSchema.safeParse({ ...validProject, type: 'client' })
+        .success,
+    ).toBe(false);
+  });
+
   it('rejects non-http links', () => {
     const result = projectFrontmatterSchema.safeParse({
       ...validProject,
