@@ -94,10 +94,10 @@ test.describe('on a 360px phone', () => {
 
 test.describe('accent colour', () => {
   for (const [scheme, rgb] of [
-    ['dark', 'rgb(251, 191, 36)'],
-    ['light', 'rgb(180, 83, 9)'],
+    ['dark', 'rgb(0, 255, 65)'],
+    ['light', 'rgb(0, 122, 14)'],
   ] as const) {
-    test(`is amber in ${scheme} mode`, async ({ browser }) => {
+    test(`is Matrix green in ${scheme} mode`, async ({ browser }) => {
       const page = await browser.newPage({ colorScheme: scheme });
       await page.goto('/');
       const title = page.getByText(
@@ -107,6 +107,27 @@ test.describe('accent colour', () => {
         },
       );
       await expect(title).toHaveCSS('color', rgb);
+      // Headings use the accent too.
+      await expect(page.getByRole('heading', { level: 1 })).toHaveCSS(
+        'color',
+        rgb,
+      );
+      await expect(
+        page.getByRole('heading', { level: 2, name: 'Experience' }),
+      ).toHaveCSS('color', rgb);
+      await expect(
+        page.getByRole('heading', { level: 3, name: 'tawk.to' }),
+      ).toHaveCSS('color', rgb);
+      await page.goto('/projects/resist-store');
+      await expect(
+        page.getByRole('heading', { level: 2, name: 'Context' }),
+      ).toHaveCSS('color', rgb);
+      // The CV stays plain black-and-white for printing and ATS parsing.
+      await page.goto('/cv');
+      await expect(page.getByRole('heading', { level: 1 })).not.toHaveCSS(
+        'color',
+        rgb,
+      );
       await page.close();
     });
   }

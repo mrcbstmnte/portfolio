@@ -47,7 +47,7 @@ export default async function ProjectPage({ params }: Props) {
       </Link>
 
       <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_200px]">
-        <article className="prose prose-neutral dark:not-print:prose-invert prose-headings:font-mono prose-a:text-accent max-w-[70ch] min-w-0">
+        <article className="prose prose-neutral dark:not-print:prose-invert prose-headings:font-mono prose-headings:text-accent prose-a:text-accent max-w-[70ch] min-w-0">
           <p className="not-prose text-muted font-mono text-xs">
             {projectBadge(project.type)}
           </p>

@@ -10,7 +10,7 @@ export function Hero() {
           ▍
         </span>
       </p>
-      <h1 className="mt-4 font-mono text-4xl font-bold tracking-tight sm:text-5xl">
+      <h1 className="text-accent mt-4 font-mono text-4xl font-bold tracking-tight sm:text-5xl">
         {profile.name}
       </h1>
       <p className="text-accent mt-3 font-mono text-lg">{profile.title}</p>

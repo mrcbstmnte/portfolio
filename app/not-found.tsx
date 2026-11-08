@@ -7,7 +7,7 @@ export default function NotFound() {
       <p className="text-muted text-sm">
         <span className="text-accent">~/marc</span> $ <MissingPath />
       </p>
-      <h1 className="mt-4 text-2xl font-semibold">
+      <h1 className="text-accent mt-4 text-2xl font-semibold">
         command not found: <MissingPath />
       </h1>
       <p className="text-muted mt-6 text-sm">

@@ -31,7 +31,9 @@ export function ExperienceTimeline({ companies }: { companies: Company[] }) {
               aria-hidden="true"
               className="bg-accent absolute top-2 -left-[29px] h-2.5 w-2.5 rounded-full"
             />
-            <h3 className="font-mono text-lg font-semibold">{company.name}</h3>
+            <h3 className="text-accent font-mono text-lg font-semibold">
+              {company.name}
+            </h3>
             <p className="text-muted font-mono text-xs">
               {company.location}
               {company.url && (

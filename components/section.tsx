@@ -19,7 +19,7 @@ export function Section({ id, command, title, children }: Props) {
       </p>
       <h2
         id={`${id}-heading`}
-        className="mt-2 font-mono text-2xl font-semibold"
+        className="text-accent mt-2 font-mono text-2xl font-semibold"
       >
         {title}
       </h2>
