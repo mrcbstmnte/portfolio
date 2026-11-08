@@ -18,6 +18,10 @@ export const skills = [
     items: ['AWS', 'Google Cloud Services', 'Kafka'],
   },
   {
+    label: 'Testing',
+    items: ['RSpec', 'Jest', 'Vitest', 'Playwright'],
+  },
+  {
     label: 'DevOps & Tooling',
     items: ['Git', 'GitHub Actions (CI/CD)', 'Docker'],
   },

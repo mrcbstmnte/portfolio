@@ -83,7 +83,12 @@ describe('site content', () => {
   });
 
   it('has the seven CV skill groups and education', () => {
-    expect(skills).toHaveLength(7);
+    expect(skills).toHaveLength(8);
     expect(education[0].degree).toBe('BS Computer Engineering');
+  });
+
+  it('lists the testing frameworks', () => {
+    const testing = skills.find((group) => group.label === 'Testing');
+    expect(testing?.items).toEqual(['RSpec', 'Jest', 'Vitest', 'Playwright']);
   });
 });

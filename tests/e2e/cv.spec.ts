@@ -113,3 +113,10 @@ test.describe('on a 360px phone', () => {
     expect(overflow).toBeLessThanOrEqual(0);
   });
 });
+
+test('lists the testing frameworks under skills', async ({ page }) => {
+  await page.goto('/cv');
+  for (const tool of ['RSpec', 'Jest', 'Vitest', 'Playwright']) {
+    await expect(page.getByText(tool, { exact: false }).first()).toBeVisible();
+  }
+});
