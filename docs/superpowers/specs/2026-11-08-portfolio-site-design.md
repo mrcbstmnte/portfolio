@@ -23,11 +23,11 @@ A personal site that serves two purposes:
 | Topic | Decision |
 |---|---|
 | Audience | Recruiters/hiring managers + general professional presence |
-| Work to show | Mix: private/NDA case studies + public projects (added later) |
+| Work to show | Mix: team (employer) and client case studies + public projects |
 | CV | Generated from site data at `/cv`; "Download PDF" via browser print |
 | Content storage | Typed TS data files + MDX for case studies |
 | Visual style | Developer/terminal-flavoured, tasteful — not a gimmick terminal |
-| Accent colour | Terminal green |
+| Accent colour | Matrix green; headings use it too (amber was tried and reverted on 2026-11-08) |
 | Contact | `mailto:` + copy-email button + LinkedIn + GitHub. No form. |
 | Structure | Single-scroll home + `/projects/[slug]` + `/cv` |
 | Hosting | Vercel (free tier) |
@@ -98,7 +98,7 @@ featured: boolean        # shown on home
 order: number            # sort order on home
 ```
 
-Private projects render an `[NDA]` badge and no links. Case-study body follows: **Context → Problem → What I did → Impact**.
+Projects have a type: `public` (own work, may link a repo), `team` (employer work, `[team]` badge) or `client` (freelance, `[client]` badge). Team and client projects never link to source code (`repoUrl` is rejected); a `demoUrl` to a live public product is allowed and shown as "live site". Case-study body follows: **Context → Problem → What I did → Impact**.
 
 **Loaders (`lib/`)**
 
@@ -124,7 +124,7 @@ Public GitHub projects are added later by dropping in new MDX files.
 
 1. **Hero** — prompt line `~/marc $ whoami` with blinking cursor; name; "Senior Software Engineer · Backend & Full Stack"; one-line summary; badges "Remote · Bacolod City, PH" and "9+ yrs"; buttons **View CV** (→ `/cv`) and **Email me** (`mailto:`).
 2. **Experience** — `git log`-style vertical timeline. Per company: name, location, role title(s) with dates, top 2–3 highlights, tech tags in monospace; expander reveals full highlights.
-3. **Selected work** — cards for featured projects: title, summary, `[NDA]`/`[public]` badge, tech tags; link to `/projects/[slug]`.
+3. **Selected work** — cards for featured projects: title, summary, `[team]`/`[client]`/`[public]` badge, tech tags; link to `/projects/[slug]`.
 4. **Skills** — groups rendered config-style (`languages: [ruby, node.js, …]`).
 5. **Contact** — email with copy-to-clipboard button, LinkedIn, GitHub.
 
@@ -145,7 +145,7 @@ Terminal-themed: `command not found: <path>` with link home.
 ## 6. Visual design
 
 - Dark-first design. First visit follows the OS colour-scheme preference; the toggle switches dark/light and the choice is persisted
-- Near-black background, off-white text, single **terminal-green** accent; light mode uses a darker green that passes WCAG AA contrast
+- Near-black background, off-white text, single **Matrix-green** accent (`#00ff41`), also used for headings outside `/cv`; light mode uses a deep Matrix green (`#007a0e`) that passes WCAG AA contrast
 - Monospace for headings, labels, tags, prompts; sans for body copy
 - Motion: blinking hero cursor, subtle fade/slide-in on scroll; all disabled under `prefers-reduced-motion`
 - Responsive from 360px up; no horizontal scroll
@@ -153,7 +153,7 @@ Terminal-themed: `command not found: <path>` with link home.
 ## 7. SEO & sharing
 
 - Per-page `metadata` (title, description, canonical)
-- Open Graph image generated with `next/og` (name, title, green accent) for home and each case study
+- Open Graph image generated with `next/og` (name, title, Matrix-green accent) for home and each case study
 - `sitemap.ts` and `robots.ts`
 - Vercel Analytics (enabled, no cookies)
 

@@ -1,0 +1,61 @@
+---
+title: RESIST — streetwear store with race-safe checkout
+summary: Online store and back office for a Bacolod streetwear brand, where two shoppers can never buy the last shirt and every sales channel draws from one stock count.
+role: Full-Stack Engineer (freelance)
+year: '2026'
+tech: [Next.js, TypeScript, PostgreSQL, Drizzle ORM, PayMongo]
+type: client
+demoUrl: https://resist-store.vercel.app
+featured: true
+order: 0
+screenshots:
+  - src: /projects/resist-store/01-storefront.webp
+    alt: 'RESIST storefront homepage with a full-width banner reading "Faster than my excuses"'
+    caption: 'Storefront homepage. The banner, gallery and testimonials are all managed from the admin.'
+    width: 1600
+    height: 844
+  - src: /projects/resist-store/02-product.webp
+    alt: 'Product page for the Endurance Division Tee with price, size picker and Add to bag button'
+    caption: 'Product page. Each size shows live availability: on hand minus units held in open checkouts.'
+    width: 1600
+    height: 1000
+  - src: /projects/resist-store/03-admin-stock.webp
+    alt: 'Admin stock dashboard with units on hand, held, running low and sold out, and a per-size stock table'
+    caption: 'Stock dashboard. Held units return automatically when a checkout expires, so no cron job is needed.'
+    width: 1600
+    height: 1000
+  - src: /projects/resist-store/04-admin-orders.webp
+    alt: 'Admin orders page with paid sales per channel and orders tagged In person, Pop-up and Instagram'
+    caption: 'Orders across channels. In-person, Instagram and pop-up sales come off the same shelf as website orders. (Demo data.)'
+    width: 1600
+    height: 1000
+  - src: /projects/resist-store/05-admin-stock-history.webp
+    alt: 'Admin stock history table listing each sale with units, balance after, order, channel and admin'
+    caption: 'Stock history. Every change is logged with the balance after it and the admin who made it. (Demo data.)'
+    width: 1600
+    height: 1000
+---
+
+## Context
+
+RESIST is a streetwear brand from Bacolod that sells through its website, Facebook and Instagram messages, and in person at pop-ups. Filipino shoppers expect to pay with GCash, Maya or QR Ph, not just cards.
+
+## Problem
+
+Small drops sell out fast, so stock had to stay correct under pressure: no overselling when two people check out the last unit, no stock stuck in abandoned checkouts, and no orders lost to a late or repeated payment notification. And because many sales happen outside the website, the stock count had to stay true across every channel, not just online.
+
+## What I did
+
+- Built the storefront, checkout and admin in Next.js 16 with PostgreSQL and Drizzle ORM.
+- Integrated PayMongo Checkout for GCash, Maya, QR Ph, card and GrabPay, with signed, idempotent webhooks; the success page also confirms payment directly so orders don't wait on a delayed webhook.
+- Made stock holds **derived, not stored**: a checkout holds its units until it expires, and an abandoned checkout frees them the moment it does, with no cron job or queue.
+- Locked the affected rows during checkout and payment (`SELECT … FOR UPDATE`, in a fixed order) so concurrent shoppers can't both buy the last unit, and covered it with a concurrency test against a real database.
+- Handled the edge case honestly: a payment that lands after its hold expired, when the stock already sold elsewhere, is still recorded as paid and flagged **Oversold** for the admin instead of being dropped.
+- Built a "Record a sale" flow so in-person, Facebook, Instagram and pop-up sales come off the same shelf as website orders, in the same transaction, with the channel and the admin who entered it.
+- Wrote every stock change to an auditable ledger, and added order confirmation emails through Gmail or Resend, a flat shipping fee, and admin-managed banner, gallery and testimonials.
+
+## Impact
+
+- One stock count is the source of truth for every channel the brand sells through.
+- Overselling is prevented under concurrent checkouts, and abandoned checkouts never lock up stock.
+- The store is live at [resist-store.vercel.app](https://resist-store.vercel.app).

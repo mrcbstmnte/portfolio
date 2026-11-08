@@ -1,0 +1,44 @@
+---
+title: Valore — white-label multi-storefront e-commerce platform
+summary: One codebase powering an unlimited number of branded bookstores — new storefronts launch in days, not weeks.
+role: Full-Stack Engineer (one of 3)
+year: '2023–2026'
+tech: [Ruby on Rails, PostgreSQL]
+type: team
+demoUrl: https://valore.com
+featured: true
+order: 1
+screenshots:
+  - src: /projects/white-label-ecommerce-platform/01-home.webp
+    alt: 'Valore homepage with a textbook search bar and links to rent, buy and sell textbooks'
+    caption: 'Valore homepage, where students rent, buy and sell college textbooks. Captured November 2026; the live site may have changed since.'
+    width: 1600
+    height: 1000
+  - src: /projects/white-label-ecommerce-platform/02-sellback.webp
+    alt: 'Valore sell-back page with an ISBN search for an instant quote'
+    caption: 'Sell-back flow: enter an ISBN for an instant quote. Captured November 2026.'
+    width: 1600
+    height: 1000
+---
+
+## Context
+
+Montani International runs [Valore](https://valore.com), where students rent, buy and sell new and used college textbooks. The business wanted to run many branded storefronts without maintaining a separate application for each one, and a team of three engineers built the platform to do it.
+
+## Problem
+
+Each new storefront meant weeks of setup, and the legacy checkout flow was confusing enough to generate a steady stream of support tickets. The payment gateway was a third-party implementation that was hard to maintain and caused production incidents.
+
+## What I did
+
+- Was one of the three engineers on the team that took the platform from concept to production.
+- Worked with the team on the multi-storefront model, so a single shared codebase serves any number of white-label storefronts.
+- Developed the core customer flows: customisable storefront pages, transactional email templates, sign-up, checkout and order confirmation.
+- Led the migration of the payment gateway from the legacy third-party implementation to an internally integrated solution.
+- Kept releases fast and safe with TDD and CI/CD on GitHub Actions.
+
+## Impact
+
+- New storefronts launch in **days rather than weeks**.
+- Clearer checkout and confirmation flows improved conversion and reduced support tickets.
+- The in-house payment integration is easier to maintain and reduced production incidents.

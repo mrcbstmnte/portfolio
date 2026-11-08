@@ -1,0 +1,118 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #fafaf9;
+  --fg: #1c1917;
+  --muted: #57534e;
+  --border: #e7e5e4;
+  --surface: #f5f5f4;
+  --accent: #007a0e;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #0a0a0a;
+  --fg: #e7e5e4;
+  --muted: #a8a29e;
+  --border: #262626;
+  --surface: #141414;
+  --accent: #00ff41;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-surface: var(--surface);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Scroll reveal is CSS-only progressive enhancement: where scroll-driven
+   animations are unsupported, or motion is reduced, content is simply visible. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      /* A fixed length, not a percentage: entry percentages scale with the
+         element's height, which left tall sections faded while being read. */
+      animation-range: entry 0px entry 120px;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-blink {
+    animation: none;
+  }
+}
+
+@media print {
+  :root,
+  .dark {
+    --bg: #ffffff;
+    --fg: #000000;
+    --muted: #333333;
+    --border: #999999;
+    --surface: #ffffff;
+    --accent: #000000;
+    color-scheme: light;
+  }
+
+  /* next-themes sets an inline color-scheme on <html>; without !important
+     Chrome paints the page margins dark when printing from dark mode. */
+  html {
+    color-scheme: light !important;
+  }
+
+  @page {
+    margin: 14mm;
+  }
+
+  .reveal {
+    animation: none !important;
+  }
+}
