@@ -8,9 +8,13 @@ import {
 } from '@/lib/schemas';
 
 const PROJECTS_DIR = path.join(process.cwd(), 'content', 'projects');
+const PUBLIC_DIR = path.join(process.cwd(), 'public');
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-export function loadProjects(dir = PROJECTS_DIR): Project[] {
+export function loadProjects(
+  dir = PROJECTS_DIR,
+  publicDir = PUBLIC_DIR,
+): Project[] {
   const files = fs.readdirSync(dir).filter((file) => file.endsWith('.mdx'));
 
   const projects = files.map((file) => {
@@ -22,10 +26,23 @@ export function loadProjects(dir = PROJECTS_DIR): Project[] {
       );
     }
 
-    const { data, content } = matter(
-      fs.readFileSync(path.join(dir, file), 'utf8'),
-    );
+    let parsed;
+    try {
+      parsed = matter(fs.readFileSync(path.join(dir, file), 'utf8'));
+    } catch (error) {
+      throw new Error(
+        `Invalid content in ${source}:\nfrontmatter is not valid YAML (${(error as Error).message.split('\n')[0]})`,
+      );
+    }
+    const { data, content } = parsed;
     const frontmatter = parseOrThrow(projectFrontmatterSchema, data, source);
+    for (const shot of frontmatter.screenshots) {
+      if (!fs.existsSync(path.join(publicDir, shot.src))) {
+        throw new Error(
+          `Invalid content in ${source}:\nscreenshot not found: public${shot.src}`,
+        );
+      }
+    }
     return { ...frontmatter, slug, body: content };
   });
 

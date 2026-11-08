@@ -57,6 +57,20 @@ export const educationSchema = z.object({
 
 export const educationListSchema = z.array(educationSchema);
 
+export const screenshotSchema = z.object({
+  // Served from public/; the loader checks the file exists.
+  src: z
+    .string()
+    .regex(
+      /^\/projects\/[a-z0-9-]+\/[a-z0-9-]+\.(webp|png|jpe?g)$/,
+      'must be a file in public/projects/<slug>/',
+    ),
+  alt: nonEmpty,
+  caption: nonEmpty,
+  width: z.number().int().positive(),
+  height: z.number().int().positive(),
+});
+
 export const projectFrontmatterSchema = z
   .object({
     title: nonEmpty,
@@ -69,6 +83,7 @@ export const projectFrontmatterSchema = z
     demoUrl: httpUrl.optional(),
     featured: z.boolean(),
     order: z.number().int(),
+    screenshots: z.array(screenshotSchema).default([]),
   })
   .refine(
     // A live product is public anyway; only source code stays private.
@@ -84,6 +99,7 @@ export type Role = z.infer<typeof roleSchema>;
 export type Company = z.infer<typeof companySchema>;
 export type SkillGroup = z.infer<typeof skillGroupSchema>;
 export type Education = z.infer<typeof educationSchema>;
+export type Screenshot = z.infer<typeof screenshotSchema>;
 export type ProjectFrontmatter = z.infer<typeof projectFrontmatterSchema>;
 export type Project = ProjectFrontmatter & { slug: string; body: string };
 

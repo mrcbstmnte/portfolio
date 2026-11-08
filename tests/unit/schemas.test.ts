@@ -82,6 +82,50 @@ describe('projectFrontmatterSchema', () => {
     ).toBe(false);
   });
 
+  it('defaults screenshots to an empty list', () => {
+    const result = projectFrontmatterSchema.parse(validProject);
+    expect(result.screenshots).toEqual([]);
+  });
+
+  it('accepts screenshots stored under /projects/', () => {
+    const result = projectFrontmatterSchema.safeParse({
+      ...validProject,
+      screenshots: [
+        {
+          src: '/projects/alpha/01-home.webp',
+          alt: 'Home page',
+          caption: 'The home page',
+          width: 1600,
+          height: 1000,
+        },
+      ],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('rejects screenshots outside /projects/ or without alt text', () => {
+    const shot = {
+      src: '/projects/alpha/01-home.webp',
+      alt: 'Home page',
+      caption: 'The home page',
+      width: 1600,
+      height: 1000,
+    };
+    for (const bad of [
+      { ...shot, src: 'https://example.com/a.webp' },
+      { ...shot, src: '/projects/../secret.webp' },
+      { ...shot, alt: '' },
+      { ...shot, width: 0 },
+    ]) {
+      expect(
+        projectFrontmatterSchema.safeParse({
+          ...validProject,
+          screenshots: [bad],
+        }).success,
+      ).toBe(false);
+    }
+  });
+
   it('rejects non-http links', () => {
     const result = projectFrontmatterSchema.safeParse({
       ...validProject,

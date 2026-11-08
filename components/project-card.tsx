@@ -1,14 +1,28 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { Tag } from '@/components/tag';
 import { projectBadge } from '@/lib/format';
 import type { Project } from '@/lib/schemas';
 
 export function ProjectCard({ project }: { project: Project }) {
+  const [cover] = project.screenshots;
   return (
     <Link
       href={`/projects/${project.slug}`}
       className="group border-border bg-surface hover:border-accent flex flex-col rounded-lg border p-5 transition-colors"
     >
+      {cover && (
+        <div className="border-border -mx-5 -mt-5 mb-4 overflow-hidden rounded-t-lg border-b">
+          <Image
+            src={cover.src}
+            alt={cover.alt}
+            width={cover.width}
+            height={cover.height}
+            sizes="(min-width: 640px) 420px, 100vw"
+            className="aspect-[16/10] w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02] motion-reduce:transition-none"
+          />
+        </div>
+      )}
       <div className="flex items-center justify-between gap-2 font-mono text-xs">
         <span
           className={project.type === 'private' ? 'text-muted' : 'text-accent'}

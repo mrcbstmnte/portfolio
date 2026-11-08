@@ -51,7 +51,22 @@ order: 5
 ## Impact
 ```
 
-Invalid content fails the build with a message naming the file and field.
+### Screenshots (optional)
+
+Put images in `public/projects/<slug>/` (WebP, about 1600px wide) and list them in the frontmatter. The first one is also the card thumbnail on the home page:
+
+```yaml
+screenshots:
+  - src: /projects/my-project/01-home.webp
+    alt: 'What the image shows, for screen readers'
+    caption: 'One line on why it matters.'
+    width: 1600
+    height: 1000
+```
+
+Quote `alt` and `caption` (they often contain colons). Only show what you're allowed to: no screens covered by an NDA, and no real customer data.
+
+Invalid content fails the build with a message naming the file and field, including a screenshot file that doesn't exist.
 
 ## Checks
 

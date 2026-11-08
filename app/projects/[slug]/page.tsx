@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import { ScreenshotGallery } from '@/components/screenshot-gallery';
 import { Tag } from '@/components/tag';
 import { projectBadge } from '@/lib/format';
 import { getAllProjects, getProject } from '@/lib/projects';
@@ -52,6 +53,7 @@ export default async function ProjectPage({ params }: Props) {
           </p>
           <h1>{project.title}</h1>
           <p className="lead">{project.summary}</p>
+          <ScreenshotGallery screenshots={project.screenshots} />
           <MDXRemote source={project.body} />
         </article>
 

@@ -171,3 +171,13 @@ test('experience links company websites in a new tab', async ({ page }) => {
     await expect(link).toHaveAttribute('target', '_blank');
   }
 });
+
+test('work cards with screenshots show a thumbnail', async ({ page }) => {
+  await page.goto('/');
+  const cards = page.locator('#work').getByRole('link');
+  await expect(cards.first().locator('img')).toHaveAttribute('alt', /.+/);
+  // NDA work without screenshots stays text-only.
+  await expect(
+    page.locator('#work a[href="/projects/realtime-event-pipeline"] img'),
+  ).toHaveCount(0);
+});

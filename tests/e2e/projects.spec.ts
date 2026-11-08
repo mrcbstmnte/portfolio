@@ -47,6 +47,29 @@ test('client case study shows its badge and live store link', async ({
   await expect(page.locator('aside a[href*="github.com"]')).toHaveCount(0);
 });
 
+test('RESIST case study shows a captioned screenshot gallery', async ({
+  page,
+}) => {
+  await page.goto('/projects/resist-store');
+  const figures = page.locator('figure');
+  await expect(figures).toHaveCount(5);
+  await expect(figures.first().locator('figcaption')).not.toBeEmpty();
+  const first = figures.first().locator('img');
+  await expect(first).toHaveAttribute('alt', /.+/);
+  await expect
+    .poll(() => first.evaluate((img: HTMLImageElement) => img.naturalWidth))
+    .toBeGreaterThan(0);
+  await expect(figures.first().locator('a')).toHaveAttribute(
+    'href',
+    '/projects/resist-store/01-storefront.webp',
+  );
+});
+
+test('NDA case study without screenshots has no gallery', async ({ page }) => {
+  await page.goto('/projects/realtime-event-pipeline');
+  await expect(page.locator('figure')).toHaveCount(0);
+});
+
 test('back link returns to the work section', async ({ page }) => {
   await page.goto('/projects/realtime-event-pipeline');
   await expect(page.getByRole('link', { name: '← cd ..' })).toHaveAttribute(

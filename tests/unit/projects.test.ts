@@ -87,11 +87,60 @@ describe('loadProjects', () => {
     expect(() => loadProjects(dir)).toThrow(/numeric\.mdx[\s\S]*year/);
   });
 
+  it('throws naming the file when the frontmatter is not valid YAML', () => {
+    const dir = makeDir({
+      'broken.mdx': '---\ntitle: Broken\nsummary: a: b: c\n---\n\nBody.\n',
+    });
+    expect(() => loadProjects(dir)).toThrow(/broken\.mdx/);
+  });
+
   it('throws when a filename is not a valid slug', () => {
     const dir = makeDir({
       'My Project.mdx': mdx({ ...base, title: 'Mine', order: '1' }),
     });
     expect(() => loadProjects(dir)).toThrow(/My Project\.mdx/);
+  });
+});
+
+describe('screenshots', () => {
+  const withShot = `---
+title: Alpha
+summary: Summary
+role: Engineer
+year: '2024'
+tech: [Ruby]
+type: private
+featured: true
+order: 1
+screenshots:
+  - src: /projects/alpha/01-home.webp
+    alt: Home page
+    caption: The home page
+    width: 1600
+    height: 1000
+---
+
+Body.
+`;
+
+  it('loads screenshots whose files exist under public/', () => {
+    const dir = makeDir({ 'alpha.mdx': withShot });
+    const publicDir = makeDir({});
+    fs.mkdirSync(path.join(publicDir, 'projects', 'alpha'), {
+      recursive: true,
+    });
+    fs.writeFileSync(path.join(publicDir, 'projects/alpha/01-home.webp'), '');
+    const [project] = loadProjects(dir, publicDir);
+    expect(project.screenshots.map((s) => s.src)).toEqual([
+      '/projects/alpha/01-home.webp',
+    ]);
+  });
+
+  it('throws naming the case study and image when a file is missing', () => {
+    const dir = makeDir({ 'alpha.mdx': withShot });
+    expect(() => loadProjects(dir, makeDir({}))).toThrow(
+      /alpha\.mdx[\s\S]*\/projects\/alpha\/01-home\.webp/,
+    );
   });
 });
 
@@ -120,6 +169,19 @@ describe('real case studies', () => {
     expect(resist?.type).toBe('client');
     expect(resist?.demoUrl).toBe('https://resist-store.vercel.app');
     expect(resist?.repoUrl).toBeUndefined();
+  });
+
+  it('has screenshots for RESIST and Valore only', () => {
+    const counts = Object.fromEntries(
+      getAllProjects().map((p) => [p.slug, p.screenshots.length]),
+    );
+    expect(counts).toEqual({
+      'resist-store': 5,
+      'white-label-ecommerce-platform': 2,
+      'direct-online-banking-payments': 0,
+      'realtime-event-pipeline': 0,
+      'knowledgebase-and-crm': 0,
+    });
   });
 
   it('lists the PayMongo stack on its case study', () => {
