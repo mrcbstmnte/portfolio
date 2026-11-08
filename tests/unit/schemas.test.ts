@@ -77,8 +77,11 @@ describe('projectFrontmatterSchema', () => {
   });
 
   it('rejects a missing title', () => {
-    const { title: _title, ...rest } = validProject;
-    expect(projectFrontmatterSchema.safeParse(rest).success).toBe(false);
+    const withoutTitle: Record<string, unknown> = { ...validProject };
+    delete withoutTitle.title;
+    expect(projectFrontmatterSchema.safeParse(withoutTitle).success).toBe(
+      false,
+    );
   });
 });
 
