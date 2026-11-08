@@ -67,7 +67,8 @@ test('RESIST case study shows a captioned screenshot gallery', async ({
 
 test('tawk.to case study shows the public product pages', async ({ page }) => {
   await page.goto('/projects/knowledgebase-and-crm');
-  await expect(page.locator('figure')).toHaveCount(2);
+  await expect(page.locator('figure')).toHaveCount(4);
+  await expect(page.locator('figcaption').first()).toContainText('live demo');
   await expect(page.locator('figcaption').first()).toContainText(
     'evolved since',
   );

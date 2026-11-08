@@ -86,7 +86,7 @@ export const experience = [
         start: '2019-05',
         end: '2021-03',
         highlights: [
-          'Built a Knowledgebase service and Contacts CRM from scratch — both still active in production today, serving the #1 most-used live chat application in the world.',
+          'Helped build a Knowledgebase service and Contacts CRM from scratch as part of a small team with the CTO — both still active in production today, serving the #1 most-used live chat application in the world.',
           'Designed and built an event-driven service on Apache Kafka, decoupling core workflows and enabling reliable communication between distributed services.',
           'Built a real-time data pipeline combining MongoDB Change Streams with Kafka, streaming data changes to downstream services with minimal latency.',
           'Maintained 100% test coverage across owned services, keeping regressions out of a platform relied on by millions of websites.',

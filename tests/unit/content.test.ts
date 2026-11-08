@@ -62,6 +62,15 @@ describe('site content', () => {
     });
   });
 
+  it('credits the team for the tawk.to Knowledgebase and CRM', () => {
+    const tawk = experience.find((c) => c.name === 'tawk.to');
+    const highlight = tawk?.roles[0].highlights.find((h) =>
+      h.includes('Knowledgebase'),
+    );
+    expect(highlight).toMatch(/team/);
+    expect(highlight).not.toMatch(/^Built /);
+  });
+
   it('has the seven CV skill groups and education', () => {
     expect(skills).toHaveLength(7);
     expect(education[0].degree).toBe('BS Computer Engineering');

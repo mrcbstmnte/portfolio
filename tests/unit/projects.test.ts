@@ -180,8 +180,18 @@ describe('real case studies', () => {
       'white-label-ecommerce-platform': 2,
       'direct-online-banking-payments': 0,
       'realtime-event-pipeline': 0,
-      'knowledgebase-and-crm': 2,
+      'knowledgebase-and-crm': 4,
     });
+  });
+
+  it('credits the team, not just Marc, for the tawk.to services', () => {
+    const project = getProject('knowledgebase-and-crm');
+    const text = [
+      project?.body,
+      ...(project?.screenshots ?? []).map((s) => s.caption),
+    ].join('\n');
+    expect(text).not.toMatch(/\bI built\b|^- Built the/m);
+    expect(project?.body).toMatch(/team/);
   });
 
   it('lists the PayMongo stack on its case study', () => {
