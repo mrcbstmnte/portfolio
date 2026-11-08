@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio — Marc Alain Bustamante
 
-## Getting Started
+Personal site and CV. Next.js (static), TypeScript, Tailwind, MDX.
 
-First, run the development server:
+## Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+fnm use        # Node 24, from .nvmrc
+npm install
+npm run dev    # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Editing content
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Everything lives in `content/`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| File             | What it holds                               |
+| ---------------- | ------------------------------------------- |
+| `profile.ts`     | name, title, tagline, summary, email, links |
+| `experience.ts`  | companies and roles, **newest first**       |
+| `skills.ts`      | skill groups                                |
+| `education.ts`   | degrees                                     |
+| `projects/*.mdx` | case studies                                |
 
-## Learn More
+The home page and `/cv` both read from these files, so edit once.
 
-To learn more about Next.js, take a look at the following resources:
+### Adding a case study
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Create `content/projects/my-project.mdx` (lowercase-kebab-case filename = URL slug):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```mdx
+---
+title: My project
+summary: One line for the card.
+role: Author
+year: '2026' # quote it
+tech: [TypeScript, Next.js]
+type: public # or private (NDA) — private must not have links
+repoUrl: https://github.com/mrcbstmnte/my-project
+demoUrl: https://example.com
+featured: true
+order: 5
+---
 
-## Deploy on Vercel
+## Context
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Problem
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## What I did
+
+## Impact
+```
+
+Invalid content fails the build with a message naming the file and field.
+
+## Checks
+
+```bash
+npm run lint && npm run typecheck && npm test && npm run test:e2e
+```
+
+## Deploying
+
+Push to GitHub and import the repo in Vercel. `main` deploys to production;
+other branches get preview URLs. Set `NEXT_PUBLIC_SITE_URL` in Vercel once
+you have a custom domain.

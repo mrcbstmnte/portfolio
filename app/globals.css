@@ -77,7 +77,9 @@ body {
     .reveal {
       animation: reveal linear both;
       animation-timeline: view();
-      animation-range: entry 0% entry 40%;
+      /* A fixed length, not a percentage: entry percentages scale with the
+         element's height, which left tall sections faded while being read. */
+      animation-range: entry 0px entry 120px;
     }
   }
 }

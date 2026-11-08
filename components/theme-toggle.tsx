@@ -14,15 +14,16 @@ export function ThemeToggle() {
     () => false,
   );
   const isDark = resolvedTheme === 'dark';
+  const label = mounted ? `theme: ${isDark ? 'dark' : 'light'}` : 'theme: …';
 
   return (
     <button
       type="button"
-      aria-label="Toggle colour theme"
+      aria-label={`${label}, toggle colour theme`}
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       className="border-border text-muted hover:border-accent hover:text-accent rounded border px-2 py-1 font-mono text-xs transition-colors"
     >
-      {mounted ? (isDark ? 'theme: dark' : 'theme: light') : 'theme: …'}
+      {label}
     </button>
   );
 }

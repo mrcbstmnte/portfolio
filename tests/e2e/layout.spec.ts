@@ -38,6 +38,14 @@ test.describe('with a dark OS preference', () => {
   });
 });
 
+test('theme toggle name includes its visible text', async ({ page }) => {
+  await page.goto('/');
+  const toggle = page.getByRole('button', { name: 'Toggle colour theme' });
+  const text = (await toggle.textContent())?.trim() ?? '';
+  expect(text).toMatch(/^theme: (dark|light)$/);
+  await expect(toggle).toHaveAccessibleName(`${text}, toggle colour theme`);
+});
+
 test('nav links to the CV and home sections', async ({ page }) => {
   await page.goto('/');
   const nav = page.getByRole('navigation');

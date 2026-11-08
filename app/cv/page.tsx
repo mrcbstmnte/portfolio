@@ -50,7 +50,7 @@ export default function CvPage() {
               <a
                 key={contact.href}
                 href={contact.href}
-                className="break-all underline-offset-2 hover:underline"
+                className="inline-block py-1 break-all underline-offset-2 hover:underline"
               >
                 {contact.label}
               </a>

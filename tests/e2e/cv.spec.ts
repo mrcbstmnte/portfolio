@@ -39,6 +39,17 @@ test('CV shows contact links but never the phone number', async ({ page }) => {
   await expect(page.locator('body')).not.toContainText('[redacted]');
 });
 
+test('CV contact links are large enough to tap', async ({ page }) => {
+  await page.goto('/cv');
+  const links = page.locator('main header a');
+  await expect(links).toHaveCount(3);
+  for (const box of await links.evaluateAll((els) =>
+    els.map((el) => el.getBoundingClientRect().height),
+  )) {
+    expect(box).toBeGreaterThanOrEqual(24);
+  }
+});
+
 test('Download PDF opens the print dialog', async ({ page }) => {
   await page.goto('/cv');
   await page.evaluate(() => {

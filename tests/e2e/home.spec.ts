@@ -137,3 +137,23 @@ test.describe('on a 360px phone', () => {
     expect(overflow).toBeLessThanOrEqual(0);
   });
 });
+
+test.describe('scroll reveal on a phone', () => {
+  test.use({ viewport: { width: 412, height: 823 } });
+
+  test('a tall section is fully opaque once 200px of it is in view', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    await page.evaluate(() => {
+      const section = document.getElementById('work')!;
+      const top = section.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo(0, top - window.innerHeight + 200);
+    });
+    await page.waitForTimeout(100);
+    const opacity = await page
+      .locator('#work')
+      .evaluate((el) => getComputedStyle(el).opacity);
+    expect(Number(opacity)).toBe(1);
+  });
+});
