@@ -93,20 +93,22 @@ test.describe('on a 360px phone', () => {
 });
 
 test.describe('accent colour', () => {
-  for (const [scheme, rgb] of [
-    ['dark', 'rgb(0, 255, 65)'],
-    ['light', 'rgb(0, 122, 14)'],
+  for (const [scheme, rgb, text] of [
+    ['dark', 'rgb(0, 255, 65)', 'rgb(231, 229, 228)'],
+    ['light', 'rgb(0, 122, 14)', 'rgb(28, 25, 23)'],
   ] as const) {
     test(`is Matrix green in ${scheme} mode`, async ({ browser }) => {
       const page = await browser.newPage({ colorScheme: scheme });
       await page.goto('/');
+      await expect(
+        page.getByRole('navigation').getByRole('link', { name: '~/marc' }),
+      ).toHaveCSS('color', rgb);
+      // The job title under the name uses the main text colour, not the accent.
       const title = page.getByText(
         'Senior Software Engineer · Backend & Full Stack',
-        {
-          exact: true,
-        },
+        { exact: true },
       );
-      await expect(title).toHaveCSS('color', rgb);
+      await expect(title).toHaveCSS('color', text);
       // Headings use the accent too.
       await expect(page.getByRole('heading', { level: 1 })).toHaveCSS(
         'color',

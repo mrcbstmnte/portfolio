@@ -13,7 +13,7 @@ export function Hero() {
       <h1 className="text-accent mt-4 font-mono text-4xl font-bold tracking-tight sm:text-5xl">
         {profile.name}
       </h1>
-      <p className="text-accent mt-3 font-mono text-lg">{profile.title}</p>
+      <p className="text-fg mt-3 font-mono text-lg">{profile.title}</p>
       <p className="text-muted mt-6 max-w-2xl text-lg">{profile.tagline}</p>
       <ul className="text-muted mt-6 flex flex-wrap gap-2 font-mono text-xs">
         <li className="border-border rounded border px-2 py-1">
