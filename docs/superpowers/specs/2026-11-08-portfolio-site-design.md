@@ -144,7 +144,7 @@ Terminal-themed: `command not found: <path>` with link home.
 
 ## 6. Visual design
 
-- Dark mode default, light mode via toggle (persisted, respects system preference on first visit)
+- Dark-first design. First visit follows the OS colour-scheme preference; the toggle switches dark/light and the choice is persisted
 - Near-black background, off-white text, single **terminal-green** accent; light mode uses a darker green that passes WCAG AA contrast
 - Monospace for headings, labels, tags, prompts; sans for body copy
 - Motion: blinking hero cursor, subtle fade/slide-in on scroll; all disabled under `prefers-reduced-motion`
