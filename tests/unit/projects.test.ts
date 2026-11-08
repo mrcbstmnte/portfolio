@@ -145,15 +145,14 @@ Body.
 });
 
 describe('real case studies', () => {
-  it('loads the five case studies, all featured', () => {
+  it('loads the four case studies, all featured', () => {
     expect(getAllProjects().map((p) => p.slug)).toEqual([
       'resist-store',
       'white-label-ecommerce-platform',
       'direct-online-banking-payments',
-      'realtime-event-pipeline',
       'knowledgebase-and-crm',
     ]);
-    expect(getFeaturedProjects()).toHaveLength(5);
+    expect(getFeaturedProjects()).toHaveLength(4);
   });
 
   it('links the Valore case study to the live site', () => {
@@ -179,7 +178,6 @@ describe('real case studies', () => {
       'resist-store': 5,
       'white-label-ecommerce-platform': 2,
       'direct-online-banking-payments': 0,
-      'realtime-event-pipeline': 0,
       'knowledgebase-and-crm': 4,
     });
   });
@@ -194,7 +192,7 @@ describe('real case studies', () => {
     expect(project?.body).toMatch(/team/);
   });
 
-  it.each(['realtime-event-pipeline', 'white-label-ecommerce-platform'])(
+  it.each(['knowledgebase-and-crm', 'white-label-ecommerce-platform'])(
     'credits the team in the %s case study',
     (slug) => {
       const body = getProject(slug)?.body ?? '';
@@ -202,6 +200,13 @@ describe('real case studies', () => {
       expect(body).not.toMatch(/^- (Built|Designed and built) /m);
     },
   );
+
+  it('covers the event pipeline in the Knowledgebase and CRM case study', () => {
+    const project = getProject('knowledgebase-and-crm');
+    expect(project?.tech).toContain('Apache Kafka');
+    expect(project?.body).toMatch(/Change Streams/);
+    expect(getProject('realtime-event-pipeline')).toBeNull();
+  });
 
   it('lists the PayMongo stack on its case study', () => {
     expect(getProject('direct-online-banking-payments')?.tech).toEqual([
@@ -212,7 +217,7 @@ describe('real case studies', () => {
   });
 
   it('finds a project by slug and returns null for unknown slugs', () => {
-    expect(getProject('realtime-event-pipeline')?.type).toBe('team');
+    expect(getProject('knowledgebase-and-crm')?.type).toBe('team');
     expect(getProject('does-not-exist')).toBeNull();
   });
 });

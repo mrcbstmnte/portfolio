@@ -15,7 +15,7 @@ test('home has description and an Open Graph image', async ({ page }) => {
 test('Open Graph images render as PNG', async ({ request }) => {
   for (const path of [
     '/opengraph-image',
-    '/projects/realtime-event-pipeline/opengraph-image',
+    '/projects/knowledgebase-and-crm/opengraph-image',
   ]) {
     const response = await request.get(path);
     expect(response.status(), path).toBe(200);
@@ -24,10 +24,10 @@ test('Open Graph images render as PNG', async ({ request }) => {
 });
 
 test('case study pages have their own Open Graph image', async ({ page }) => {
-  await page.goto('/projects/realtime-event-pipeline');
+  await page.goto('/projects/knowledgebase-and-crm');
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
     'content',
-    /\/projects\/realtime-event-pipeline\/opengraph-image/,
+    /\/projects\/knowledgebase-and-crm\/opengraph-image/,
   );
 });
 
@@ -38,7 +38,6 @@ test('sitemap lists home, CV and every case study', async ({ request }) => {
     '/projects/resist-store',
     '/projects/white-label-ecommerce-platform',
     '/projects/direct-online-banking-payments',
-    '/projects/realtime-event-pipeline',
     '/projects/knowledgebase-and-crm',
   ]) {
     expect(body).toContain(path);

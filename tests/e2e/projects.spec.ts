@@ -4,7 +4,6 @@ const slugs = [
   'resist-store',
   'white-label-ecommerce-platform',
   'direct-online-banking-payments',
-  'realtime-event-pipeline',
   'knowledgebase-and-crm',
 ];
 
@@ -24,10 +23,10 @@ for (const slug of slugs) {
 test('team case study shows its badge and no external links', async ({
   page,
 }) => {
-  await page.goto('/projects/realtime-event-pipeline');
+  await page.goto('/projects/direct-online-banking-payments');
   await expect(page.getByText('[team]')).toBeVisible();
   await expect(page.locator('aside a[href^="http"]')).toHaveCount(0);
-  await expect(page.locator('aside')).toContainText('Back-end Engineer');
+  await expect(page.locator('aside')).toContainText('Interim Technical Lead');
 });
 
 test('team case study can link to its live product', async ({ page }) => {
@@ -77,12 +76,22 @@ test('tawk.to case study shows the public product pages', async ({ page }) => {
 });
 
 test('case study without screenshots has no gallery', async ({ page }) => {
-  await page.goto('/projects/realtime-event-pipeline');
+  await page.goto('/projects/direct-online-banking-payments');
   await expect(page.locator('figure')).toHaveCount(0);
 });
 
+test('the event pipeline is part of the Knowledgebase and CRM case study', async ({
+  page,
+}) => {
+  const response = await page.goto('/projects/realtime-event-pipeline');
+  expect(response?.status()).toBe(404);
+  await page.goto('/projects/knowledgebase-and-crm');
+  await expect(page.locator('article')).toContainText('Kafka');
+  await expect(page.locator('aside')).toContainText('Apache Kafka');
+});
+
 test('back link returns to the work section', async ({ page }) => {
-  await page.goto('/projects/realtime-event-pipeline');
+  await page.goto('/projects/direct-online-banking-payments');
   await expect(page.getByRole('link', { name: '← cd ..' })).toHaveAttribute(
     'href',
     '/#work',
@@ -120,7 +129,7 @@ test.describe('printing from dark mode', () => {
   test.use({ colorScheme: 'dark' });
 
   test('case study text prints dark on white', async ({ page }) => {
-    await page.goto('/projects/realtime-event-pipeline');
+    await page.goto('/projects/direct-online-banking-payments');
     await expect(page.locator('html')).toHaveClass(/dark/);
     await page.emulateMedia({ media: 'print' });
 

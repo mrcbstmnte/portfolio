@@ -56,7 +56,7 @@ test('selected work links to each case study with its badge', async ({
 }) => {
   await page.goto('/');
   const cards = page.locator('#work').getByRole('link');
-  await expect(cards).toHaveCount(5);
+  await expect(cards).toHaveCount(4);
   await expect(cards.first()).toHaveAttribute('href', '/projects/resist-store');
   await expect(cards.first()).toContainText('[client]');
   await expect(cards.nth(1)).toContainText('[team]');
@@ -178,7 +178,9 @@ test('work cards with screenshots show a thumbnail', async ({ page }) => {
   await expect(cards.first().locator('img')).toHaveAttribute('alt', /.+/);
   // Work without screenshots stays text-only.
   await expect(
-    page.locator('#work a[href="/projects/realtime-event-pipeline"] img'),
+    page.locator(
+      '#work a[href="/projects/direct-online-banking-payments"] img',
+    ),
   ).toHaveCount(0);
 });
 
