@@ -65,6 +65,14 @@ test('RESIST case study shows a captioned screenshot gallery', async ({
   );
 });
 
+test('tawk.to case study shows the public product pages', async ({ page }) => {
+  await page.goto('/projects/knowledgebase-and-crm');
+  await expect(page.locator('figure')).toHaveCount(2);
+  await expect(page.locator('figcaption').first()).toContainText(
+    'evolved since',
+  );
+});
+
 test('NDA case study without screenshots has no gallery', async ({ page }) => {
   await page.goto('/projects/realtime-event-pipeline');
   await expect(page.locator('figure')).toHaveCount(0);

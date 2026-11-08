@@ -171,7 +171,7 @@ describe('real case studies', () => {
     expect(resist?.repoUrl).toBeUndefined();
   });
 
-  it('has screenshots for RESIST and Valore only', () => {
+  it('has screenshots only where the work is public', () => {
     const counts = Object.fromEntries(
       getAllProjects().map((p) => [p.slug, p.screenshots.length]),
     );
@@ -180,7 +180,7 @@ describe('real case studies', () => {
       'white-label-ecommerce-platform': 2,
       'direct-online-banking-payments': 0,
       'realtime-event-pipeline': 0,
-      'knowledgebase-and-crm': 0,
+      'knowledgebase-and-crm': 2,
     });
   });
 
