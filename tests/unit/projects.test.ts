@@ -32,7 +32,7 @@ const base = {
   role: 'Engineer',
   year: "'2024'",
   tech: '[Ruby]',
-  type: 'private',
+  type: 'team',
   featured: 'true',
 };
 
@@ -109,7 +109,7 @@ summary: Summary
 role: Engineer
 year: '2024'
 tech: [Ruby]
-type: private
+type: team
 featured: true
 order: 1
 screenshots:
@@ -194,6 +194,15 @@ describe('real case studies', () => {
     expect(project?.body).toMatch(/team/);
   });
 
+  it.each(['realtime-event-pipeline', 'white-label-ecommerce-platform'])(
+    'credits the team in the %s case study',
+    (slug) => {
+      const body = getProject(slug)?.body ?? '';
+      expect(body).toMatch(/team/);
+      expect(body).not.toMatch(/^- (Built|Designed and built) /m);
+    },
+  );
+
   it('lists the PayMongo stack on its case study', () => {
     expect(getProject('direct-online-banking-payments')?.tech).toEqual([
       'Ruby on Rails',
@@ -203,7 +212,7 @@ describe('real case studies', () => {
   });
 
   it('finds a project by slug and returns null for unknown slugs', () => {
-    expect(getProject('realtime-event-pipeline')?.type).toBe('private');
+    expect(getProject('realtime-event-pipeline')?.type).toBe('team');
     expect(getProject('does-not-exist')).toBeNull();
   });
 });

@@ -14,7 +14,7 @@ export const experience = [
         start: '2023-07',
         end: '2026-10',
         highlights: [
-          'Built and maintained Valore (valore.com), a multi-storefront, white-label e-commerce platform supporting an unlimited number of branded storefronts from a single shared codebase, cutting the time to launch a new storefront to days rather than weeks.',
+          'Helped build and maintain Valore (valore.com), a multi-storefront, white-label e-commerce platform supporting an unlimited number of branded storefronts from a single shared codebase, cutting the time to launch a new storefront to days rather than weeks.',
           'Worked as one of 3 engineers who built the platform from the ground up, taking it from concept to production and supporting live e-commerce operations for new and used books.',
           "Led migration of the platform's payment gateway from a legacy third-party implementation to an internally integrated solution, improving maintainability and reducing production incidents.",
           'Developed core customer-facing flows — customizable storefront pages, transactional email templates, sign-up, checkout, and order confirmation — directly improving conversion and reducing support tickets tied to a confusing legacy flow.',
@@ -87,8 +87,8 @@ export const experience = [
         end: '2021-03',
         highlights: [
           'Helped build a Knowledgebase service and Contacts CRM from scratch as part of a small team with the CTO — both still active in production today, serving the #1 most-used live chat application in the world.',
-          'Designed and built an event-driven service on Apache Kafka, decoupling core workflows and enabling reliable communication between distributed services.',
-          'Built a real-time data pipeline combining MongoDB Change Streams with Kafka, streaming data changes to downstream services with minimal latency.',
+          'Worked on the team that designed and built an event-driven service on Apache Kafka, decoupling core workflows and enabling reliable communication between distributed services.',
+          'Helped build a real-time data pipeline combining MongoDB Change Streams with Kafka, streaming data changes to downstream services with minimal latency.',
           'Maintained 100% test coverage across owned services, keeping regressions out of a platform relied on by millions of websites.',
           'Implemented Elasticsearch-powered search and filtering, and contributed to architecture discussions within a 4–5 person engineering team.',
         ],

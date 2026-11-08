@@ -78,7 +78,7 @@ export const projectFrontmatterSchema = z
     role: nonEmpty,
     year: nonEmpty,
     tech: z.array(nonEmpty).min(1),
-    type: z.enum(['public', 'private', 'client']),
+    type: z.enum(['public', 'team', 'client']),
     repoUrl: httpUrl.optional(),
     demoUrl: httpUrl.optional(),
     featured: z.boolean(),

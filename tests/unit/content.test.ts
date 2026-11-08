@@ -71,6 +71,17 @@ describe('site content', () => {
     expect(highlight).not.toMatch(/^Built /);
   });
 
+  it('credits the team for the Kafka pipeline and Valore bullets', () => {
+    const highlights = experience
+      .filter((c) => ['tawk.to', 'Montani International Inc.'].includes(c.name))
+      .flatMap((c) => c.roles[0].highlights)
+      .filter((h) => /Kafka|Valore/.test(h));
+    expect(highlights).toHaveLength(3);
+    for (const highlight of highlights) {
+      expect(highlight).not.toMatch(/^(Built|Designed and built) /);
+    }
+  });
+
   it('has the seven CV skill groups and education', () => {
     expect(skills).toHaveLength(7);
     expect(education[0].degree).toBe('BS Computer Engineering');

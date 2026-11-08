@@ -21,16 +21,18 @@ for (const slug of slugs) {
   });
 }
 
-test('private case study shows NDA and no external links', async ({ page }) => {
+test('team case study shows its badge and no external links', async ({
+  page,
+}) => {
   await page.goto('/projects/realtime-event-pipeline');
-  await expect(page.getByText('[NDA]')).toBeVisible();
+  await expect(page.getByText('[team]')).toBeVisible();
   await expect(page.locator('aside a[href^="http"]')).toHaveCount(0);
   await expect(page.locator('aside')).toContainText('Back-end Engineer');
 });
 
-test('NDA case study can link to its live product', async ({ page }) => {
+test('team case study can link to its live product', async ({ page }) => {
   await page.goto('/projects/white-label-ecommerce-platform');
-  await expect(page.getByText('[NDA]')).toBeVisible();
+  await expect(page.getByText('[team]')).toBeVisible();
   await expect(
     page.locator('aside').getByRole('link', { name: 'live site ↗' }),
   ).toHaveAttribute('href', 'https://valore.com');
@@ -74,7 +76,7 @@ test('tawk.to case study shows the public product pages', async ({ page }) => {
   );
 });
 
-test('NDA case study without screenshots has no gallery', async ({ page }) => {
+test('case study without screenshots has no gallery', async ({ page }) => {
   await page.goto('/projects/realtime-event-pipeline');
   await expect(page.locator('figure')).toHaveCount(0);
 });

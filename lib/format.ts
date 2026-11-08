@@ -40,7 +40,7 @@ export function toConfigKey(label: string): string {
 
 const BADGES: Record<ProjectFrontmatter['type'], string> = {
   public: '[public]',
-  private: '[NDA]',
+  team: '[team]',
   client: '[client]',
 };
 

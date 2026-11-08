@@ -48,7 +48,7 @@ describe('toConfigKey', () => {
 
 describe('projectBadge', () => {
   it('labels each project type', () => {
-    expect(projectBadge('private')).toBe('[NDA]');
+    expect(projectBadge('team')).toBe('[team]');
     expect(projectBadge('public')).toBe('[public]');
     expect(projectBadge('client')).toBe('[client]');
   });

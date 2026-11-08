@@ -24,11 +24,7 @@ export function ProjectCard({ project }: { project: Project }) {
         </div>
       )}
       <div className="flex items-center justify-between gap-2 font-mono text-xs">
-        <span
-          className={project.type === 'private' ? 'text-muted' : 'text-accent'}
-        >
-          {projectBadge(project.type)}
-        </span>
+        <span className="text-accent">{projectBadge(project.type)}</span>
         <span className="text-muted">{project.year}</span>
       </div>
       <h3 className="group-hover:text-accent mt-3 font-mono font-semibold transition-colors">

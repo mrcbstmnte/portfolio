@@ -35,7 +35,7 @@ summary: One line for the card.
 role: Author
 year: '2026' # quote it
 tech: [TypeScript, Next.js]
-type: public # or private (NDA) — private may link a live site, never a repo
+type: public # public | team | client — team and client may link a live site, never a repo
 repoUrl: https://github.com/mrcbstmnte/my-project
 demoUrl: https://example.com
 featured: true
@@ -64,7 +64,7 @@ screenshots:
     height: 1000
 ```
 
-Quote `alt` and `caption` (they often contain colons). Only show what you're allowed to: no screens covered by an NDA, and no real customer data.
+Quote `alt` and `caption` (they often contain colons). Only show what you're allowed to share, and no real customer data.
 
 Invalid content fails the build with a message naming the file and field, including a screenshot file that doesn't exist.
 

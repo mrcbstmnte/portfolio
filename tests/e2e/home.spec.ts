@@ -51,7 +51,7 @@ test('experience timeline lists every company and expands details', async ({
   await expect(mentoring).toBeVisible();
 });
 
-test('selected work links to each case study with an NDA badge', async ({
+test('selected work links to each case study with its badge', async ({
   page,
 }) => {
   await page.goto('/');
@@ -59,7 +59,7 @@ test('selected work links to each case study with an NDA badge', async ({
   await expect(cards).toHaveCount(5);
   await expect(cards.first()).toHaveAttribute('href', '/projects/resist-store');
   await expect(cards.first()).toContainText('[client]');
-  await expect(cards.nth(1)).toContainText('[NDA]');
+  await expect(cards.nth(1)).toContainText('[team]');
 });
 
 test('skills render as config keys', async ({ page }) => {
@@ -176,8 +176,13 @@ test('work cards with screenshots show a thumbnail', async ({ page }) => {
   await page.goto('/');
   const cards = page.locator('#work').getByRole('link');
   await expect(cards.first().locator('img')).toHaveAttribute('alt', /.+/);
-  // NDA work without screenshots stays text-only.
+  // Work without screenshots stays text-only.
   await expect(
     page.locator('#work a[href="/projects/realtime-event-pipeline"] img'),
   ).toHaveCount(0);
+});
+
+test('no case study is labelled NDA', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('#work')).not.toContainText('NDA');
 });

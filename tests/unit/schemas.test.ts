@@ -37,27 +37,27 @@ describe('projectFrontmatterSchema', () => {
     expect(projectFrontmatterSchema.safeParse(validProject).success).toBe(true);
   });
 
-  it('accepts a private project without links', () => {
+  it('accepts a team project without links', () => {
     const result = projectFrontmatterSchema.safeParse({
       ...validProject,
-      type: 'private',
+      type: 'team',
       repoUrl: undefined,
     });
     expect(result.success).toBe(true);
   });
 
-  it('rejects a private project that links to its source code', () => {
+  it('rejects a team project that links to its source code', () => {
     expect(
-      projectFrontmatterSchema.safeParse({ ...validProject, type: 'private' })
+      projectFrontmatterSchema.safeParse({ ...validProject, type: 'team' })
         .success,
     ).toBe(false);
   });
 
-  it('accepts a private project that links to its live product', () => {
+  it('accepts a team project that links to its live product', () => {
     expect(
       projectFrontmatterSchema.safeParse({
         ...validProject,
-        type: 'private',
+        type: 'team',
         repoUrl: undefined,
         demoUrl: 'https://example.com',
       }).success,
