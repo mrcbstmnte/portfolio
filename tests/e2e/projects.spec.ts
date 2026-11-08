@@ -100,7 +100,9 @@ test('back link returns to the work section', async ({ page }) => {
 
 test('page title uses the project title', async ({ page }) => {
   await page.goto('/projects/knowledgebase-and-crm');
-  await expect(page).toHaveTitle(/Knowledgebase service & Contacts CRM/);
+  await expect(page).toHaveTitle(
+    /Knowledgebase & Contacts CRM, on a real-time event pipeline/,
+  );
 });
 
 test('unknown slug returns 404', async ({ page }) => {
